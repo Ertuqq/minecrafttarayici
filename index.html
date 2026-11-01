@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sürpriz Sayfa!</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        /* Jumpscare resmi başlangıçta gizli olacak */
+        #jumpscare-img {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        #baslat-yazisi {
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Kullanıcıyı yanıltmak için bir yazı veya buton -->
+    <div id="baslat-yazisi">Devam etmek için ekrana tıkla...</div>
+
+    <!-- Jumpscare Resmi -->
+    <img id="jumpscare-img" src="korkunc.gif" alt="Jumpscare">
+
+    <!-- Jumpscare Sesi -->
+    <audio id="jumpscare-audio" src="ciglik.mp3" preload="auto"></audio>
+
+    <script>
+        // Tarayıcılar kullanıcı etkileşimi (tıklama) olmadan ses oynatılmasına izin vermez.
+        // Bu yüzden kullanıcının ekrana tıklamasını bekliyoruz.
+        document.body.addEventListener('click', function() {
+            var yazi = document.getElementById('baslat-yazisi');
+            var resim = document.getElementById('jumpscare-img');
+            var ses = document.getElementById('jumpscare-audio');
+
+            // Yazıyı gizle, resmi göster
+            yazi.style.display = 'none';
+            resim.style.display = 'block';
+
+            // Sesi son ses çal
+            ses.volume = 1.0;
+            ses.play();
+
+            // İsteğe bağlı: Tarayıcı izin veriyorsa tam ekran yap
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            }
+        });
+    </script>
+
+</body>
+</html>
